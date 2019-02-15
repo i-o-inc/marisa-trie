@@ -58,6 +58,7 @@ class Exception : public std::exception {
 #define MARISA_LINE_TO_STR(line) MARISA_INT_TO_STR(line)
 #define MARISA_LINE_STR MARISA_LINE_TO_STR(__LINE__)
 
+#ifdef __EXCEPTIONS
 // MARISA_THROW throws an exception with a filename, a line number, an error
 // code and an error message. The message format is as follows:
 //  "__FILE__:__LINE__: error_code: error_message"
@@ -68,6 +69,7 @@ class Exception : public std::exception {
 // MARISA_THROW_IF throws an exception if `condition' is true.
 #define MARISA_THROW_IF(condition, error_code) \
   (void)((!(condition)) || (MARISA_THROW(error_code, #condition), 0))
+#endif // __EXCEPTIONS
 
 // MARISA_DEBUG_IF is ignored if _DEBUG is undefined. So, it is useful for
 // debugging time-critical codes.
